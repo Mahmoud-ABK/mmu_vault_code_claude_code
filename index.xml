@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>a part of MµLearning</title>
+      <link>https://quartz.jzhao.xyz</link>
+      <description>Last 10 notes on a part of MµLearning</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>L5-Hooks</title>
+    <link>https://quartz.jzhao.xyz/L5-Hooks</link>
+    <guid>https://quartz.jzhao.xyz/L5-Hooks</guid>
+    <description><![CDATA[ L5 , Hooks Where you are: You have a fully configured project. ]]></description>
+    <pubDate>Wed, 17 Jun 2026 17:37:52 GMT</pubDate>
+  </item><item>
+    <title>Summary</title>
+    <link>https://quartz.jzhao.xyz/Summary</link>
+    <guid>https://quartz.jzhao.xyz/Summary</guid>
+    <description><![CDATA[ to internalise Claude Code — Progressive Guide Index A level-by-level guide from first session to autonomous multi-agent workflows. ]]></description>
+    <pubDate>Fri, 05 Jun 2026 12:04:38 GMT</pubDate>
+  </item><item>
+    <title>L8-MultiAgent-Headless-Power</title>
+    <link>https://quartz.jzhao.xyz/L8-MultiAgent-Headless-Power</link>
+    <guid>https://quartz.jzhao.xyz/L8-MultiAgent-Headless-Power</guid>
+    <description><![CDATA[ L8 , Headless, Scheduling and Power Patterns Where you are: Your single-session toolkit is complete — context, permissions, hooks, MCP, skills, agents. ]]></description>
+    <pubDate>Fri, 05 Jun 2026 11:50:18 GMT</pubDate>
+  </item><item>
+    <title>L6-MCP-Servers-and-Plugins</title>
+    <link>https://quartz.jzhao.xyz/L6-MCP-Servers-and-Plugins</link>
+    <guid>https://quartz.jzhao.xyz/L6-MCP-Servers-and-Plugins</guid>
+    <description><![CDATA[ L6 , MCP Servers, Plugins &amp; LSP Where you are: Claude can manage your files, run your build, and enforce your architecture rules. ]]></description>
+    <pubDate>Fri, 05 Jun 2026 11:50:09 GMT</pubDate>
+  </item><item>
+    <title>L7-Skills-Agents-Commands</title>
+    <link>https://quartz.jzhao.xyz/L7-Skills-Agents-Commands</link>
+    <guid>https://quartz.jzhao.xyz/L7-Skills-Agents-Commands</guid>
+    <description><![CDATA[ L7 , Skills, Agents &amp; Custom Commands Where you are: Your project is configured — context, permissions, hooks, MCP. ]]></description>
+    <pubDate>Fri, 05 Jun 2026 11:50:00 GMT</pubDate>
+  </item><item>
+    <title>Appendix 2... Settings Examples</title>
+    <link>https://quartz.jzhao.xyz/Appendix-2...-Settings-Examples</link>
+    <guid>https://quartz.jzhao.xyz/Appendix-2...-Settings-Examples</guid>
+    <description><![CDATA[ Appendix 2 , Settings Examples Annotated reference for every configurable key across the three settings.json files. ]]></description>
+    <pubDate>Sun, 31 May 2026 22:53:40 GMT</pubDate>
+  </item><item>
+    <title>Appendix 1... ignore files</title>
+    <link>https://quartz.jzhao.xyz/Appendix-1...-ignore-files</link>
+    <guid>https://quartz.jzhao.xyz/Appendix-1...-ignore-files</guid>
+    <description><![CDATA[ Appendix 1 — Ignore Files How Claude Code decides which files exist, which it reads, and what you can do about it. ]]></description>
+    <pubDate>Sun, 31 May 2026 22:33:10 GMT</pubDate>
+  </item><item>
+    <title>L3-Permissions-Settings</title>
+    <link>https://quartz.jzhao.xyz/L3-Permissions-Settings</link>
+    <guid>https://quartz.jzhao.xyz/L3-Permissions-Settings</guid>
+    <description><![CDATA[ L3 , Permissions &amp; settings.json Where you are: Sessions work, CLAUDE.md is set up, but Claude interrupts constantly for permission. ]]></description>
+    <pubDate>Sat, 30 May 2026 23:08:25 GMT</pubDate>
+  </item><item>
+    <title>L4-Scoping</title>
+    <link>https://quartz.jzhao.xyz/L4-Scoping</link>
+    <guid>https://quartz.jzhao.xyz/L4-Scoping</guid>
+    <description><![CDATA[ L4 , Scoping: Project vs Global Where you are: You have a working project configuration — CLAUDE.md, settings.json, and the .claude/ directory. ]]></description>
+    <pubDate>Sat, 30 May 2026 22:00:19 GMT</pubDate>
+  </item><item>
+    <title>L2-Context-CLAUDE-md</title>
+    <link>https://quartz.jzhao.xyz/L2-Context-CLAUDE-md</link>
+    <guid>https://quartz.jzhao.xyz/L2-Context-CLAUDE-md</guid>
+    <description><![CDATA[ L2 , Context &amp; CLAUDE.md Where you are: You can run sessions. ]]></description>
+    <pubDate>Fri, 29 May 2026 00:01:39 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

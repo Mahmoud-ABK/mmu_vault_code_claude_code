@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>L4-Scoping</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="a part of MµLearning"/><meta property="og:title" content="L4-Scoping"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="L4-Scoping"/><meta name="twitter:description" content="L4 , Scoping: Project vs Global Where you are: You have a working project configuration — CLAUDE.md, settings.json, and the .claude/ directory."/><meta property="og:description" content="L4 , Scoping: Project vs Global Where you are: You have a working project configuration — CLAUDE.md, settings.json, and the .claude/ directory."/><meta property="og:image:alt" content="L4 , Scoping: Project vs Global Where you are: You have a working project configuration — CLAUDE.md, settings.json, and the .claude/ directory."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/L4-Scoping"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/L4-Scoping"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="L4 , Scoping: Project vs Global Where you are: You have a working project configuration — CLAUDE.md, settings.json, and the .claude/ directory."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvbWFobW91ZC9vYnNpZGlhbi9zY3JpcHRzL3F1YXJ0ei9xdWFydHovY29tcG9uZW50cy9zdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://quartz.jzhao.xyz/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/L4-Scoping-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/L4-Scoping-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/L4-Scoping-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="L4-Scoping"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href=".">a part of MµLearning</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-6" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>L4 Scoping</a></div></nav><h1 class="article-title">L4-Scoping</h1><p show-comma="true" class="content-meta"><time datetime="2026-05-30T22:00:19.561Z">May 30, 2026</time><span>12 min read</span></p></div></div><article class="popover-hint"><h1 id="l4--scoping-project-vs-global">L4 , Scoping: Project vs Global<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#l4--scoping-project-vs-global" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Where you are:</strong> You have a working project configuration — CLAUDE.md, <code>settings.json</code>, and the <code>.claude/</code> directory. You’ve seen <code>~/.claude/</code> references and deferred them.<br/>
+<strong>Goal:</strong> Complete the project scope picture with the primitives not yet covered, then understand the global scope and how the two compose.</p>
+<hr/>
+<h2 id="the-architecture--five-layers">The architecture , five layers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-architecture--five-layers" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Before going into either scope, it helps to see where configuration sits inside the full system:</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    You[\&quot;You — natural language\&quot;]\n    Runtime[\&quot;Runtime layer&lt;br/>Agentic loop · LLM (Sonnet / Opus) · Tool executor\&quot;]\n    Tool[\&quot;Tool layer&lt;br/>Read / Edit&lt;br/>Bash&lt;br/>Task (agent)&lt;br/>LSP · MCP\&quot;]\n    Config[\&quot;Config layer&lt;br/>~/.claude/&lt;br/>.claude/&lt;br/>Merge order\&quot;]\n    Memory[\&quot;Memory layer&lt;br/>CLAUDE.md&lt;br/>rules/*.md&lt;br/>Auto-memory\&quot;]\n    Extension[\&quot;Extension layer&lt;br/>Hooks — lifecycle enforcement&lt;br/>Skills — reusable instruction sets&lt;br/>Agents — specialized sub-processes&lt;br/>Plugins · MCP servers — external tool bridges\&quot;]\n\n    You --> Runtime\n    Runtime --> Tool\n    Runtime --> Config\n    Runtime --> Memory\n    Tool --> Extension\n    Config --> Extension\n    Memory --> Extension&quot;">flowchart TD
+    You[&quot;You — natural language&quot;]
+    Runtime[&quot;Runtime layer&lt;br/>Agentic loop · LLM (Sonnet / Opus) · Tool executor&quot;]
+    Tool[&quot;Tool layer&lt;br/>Read / Edit&lt;br/>Bash&lt;br/>Task (agent)&lt;br/>LSP · MCP&quot;]
+    Config[&quot;Config layer&lt;br/>~/.claude/&lt;br/>.claude/&lt;br/>Merge order&quot;]
+    Memory[&quot;Memory layer&lt;br/>CLAUDE.md&lt;br/>rules/*.md&lt;br/>Auto-memory&quot;]
+    Extension[&quot;Extension layer&lt;br/>Hooks — lifecycle enforcement&lt;br/>Skills — reusable instruction sets&lt;br/>Agents — specialized sub-processes&lt;br/>Plugins · MCP servers — external tool bridges&quot;]
+
+    You --> Runtime
+    Runtime --> Tool
+    Runtime --> Config
+    Runtime --> Memory
+    Tool --> Extension
+    Config --> Extension
+    Memory --> Extension
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>L5–L9 each go deep on one part of the Extension and Config layers. L4 is the map.</p>
+<hr/>
+<h2 id="project-scope--the-full-picture">Project scope , the full picture<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#project-scope--the-full-picture" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Everything you did in L2 and L3 was project scope: CLAUDE.md, <code>settings.json</code>, <code>settings.local.json</code>. Those live in the project and apply only to it. But the project has more primitives than those.</p>
+<pre><code>your-project/
+├── CLAUDE.md               # conventions, architecture, build commands
+├── CLAUDE.local.md         # personal project overrides — gitignored, not shared
+├── .mcp.json               # MCP server definitions for this project
+│
+└── .claude/
+    ├── CLAUDE.md            # alternative location for project instructions
+    ├── settings.json        # team permissions + hooks (committed to git)
+    ├── settings.local.json  # personal overrides (gitignored)
+    │
+    ├── rules/               # ← not yet covered
+    ├── commands/            # ← not yet covered
+    ├── hooks/               # ← L5
+    ├── skills/              # ← L7
+    └── agents/              # ← L7
+</code></pre>
+<p><code>hooks/</code>, <code>skills/</code>, and <code>agents/</code> are covered in their own levels. What remains is <code>rules/</code>, <code>commands/</code>, and two files worth calling out explicitly.</p>
+<p><strong><code>CLAUDE.local.md</code></strong> sits at the project root and loads alongside <code>CLAUDE.md</code> at session start. It is for personal project-specific preferences — your sandbox URLs, preferred test data, local paths — that should not be committed. Create it manually and add it to <code>.gitignore</code>. It never reaches the team; <code>CLAUDE.md</code> does.</p>
+<p><strong>Project CLAUDE.md location.</strong> The official supported locations are <code>./CLAUDE.md</code> at the project root or <code>./.claude/CLAUDE.md</code> inside the <code>.claude/</code> directory. Both are treated identically. Use whichever fits your repo layout.</p>
+<h3 id="clauderules--scoped-claudemd-fragments"><code>.claude/rules/</code> , scoped CLAUDE.md fragments<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#clauderules--scoped-claudemd-fragments" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>CLAUDE.md is a single file loaded in full at session start. As a project grows, conventions split by domain: the frontend team cares about React and Tailwind; the backend team cares about Hexagonal architecture and SQL conventions. Putting all of that in one file costs context tokens on every session regardless of which part of the codebase is being worked on.</p>
+<p><code>rules/</code> fragments solve this. Each fragment is a markdown file with a <code>paths:</code> header. Claude loads the fragment only when it reads a file that matches one of those paths.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># .claude/rules/frontend.md</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">paths:</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> &quot;src/frontend/**&quot;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> &quot;*.tsx&quot;</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># Frontend conventions</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> React 19, functional components only</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Zustand for global state, no Redux</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Tailwind only , no inline styles or CSS modules</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Never fetch directly in components , use the api/ layer</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># .claude/rules/domain.md</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">paths:</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> &quot;src/domain/**&quot;</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># Domain layer rules</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> No imports from infra/ , use port interfaces in domain/port/</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Entities are pure Java, no framework annotations</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> No repository.save() inside entity methods</span></span></code></pre></figure>
+<p>The practical effect: working on a frontend file loads the frontend fragment; working on a domain class loads the domain fragment; neither loads both. Context cost is scoped to what is actually relevant.</p>
+<blockquote>
+<p>Rules are advisory, same as CLAUDE.md. For rules that must always hold, use a <code>PreToolUse</code> hook (L5).</p>
+</blockquote>
+<h3 id="another-solution-to-claudemd-explosion--claudemd-per-module">Another solution to CLAUDE.md explosion , CLAUDE.md per module<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#another-solution-to-claudemd-explosion--claudemd-per-module" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>.claude/rules/</code> is not the only way to split a growing CLAUDE.md. You can place a <code>CLAUDE.md</code> directly inside each module or package directory:</p>
+<pre><code>your-project/
+├── CLAUDE.md                 # project-wide conventions
+├── src/
+│   ├── frontend/
+│   │   └── CLAUDE.md         # frontend-only conventions
+│   ├── domain/
+│   │   └── CLAUDE.md         # domain layer conventions
+│   └── infra/
+│       └── CLAUDE.md         # infra adapter conventions
+</code></pre>
+<p>Loading behavior is identical to rules fragments: the root CLAUDE.md loads at session start; subdirectory CLAUDE.md files load lazily when Claude reads a file in that directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th></th><th><code>.claude/rules/*.md</code></th><th>Subdirectory <code>CLAUDE.md</code></th></tr></thead><tbody><tr><td><strong>Location</strong></td><td>Centralised in <code>.claude/rules/</code></td><td>Lives alongside the code it describes</td></tr><tr><td><strong>Path matching</strong></td><td>Explicit <code>paths:</code> header — can span unrelated directories or file types</td><td>Implicit — matches the directory it sits in and everything below</td></tr><tr><td><strong>Cross-cutting rules</strong></td><td>One fragment can match <code>src/frontend/**</code> and <code>*.tsx</code> together</td><td>Not possible across directory boundaries</td></tr><tr><td><strong>Team visibility</strong></td><td>Only Claude reads it</td><td>Readable by the whole team as documentation</td></tr><tr><td><strong>Monorepo fit</strong></td><td>Good when conventions cross package lines</td><td>Natural when each package is independently owned</td></tr></tbody></table></div>
+<p>Use rules fragments for cross-cutting patterns. Use subdirectory CLAUDE.md when the conventions belong to a specific module and should travel with it. Both load independently and compose — you can use them together.</p>
+<h3 id="claudecommands--project-slash-commands"><code>.claude/commands/</code> , project slash commands<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#claudecommands--project-slash-commands" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Custom slash commands package a repeatable prompt into a named command. The filename becomes the command: <code>review.md</code> → <code>/review</code>.</p>
+<pre><code>.claude/commands/
+├── review.md
+├── commit.md
+└── gate.md
+</code></pre>
+<p>A command file is a markdown file with optional frontmatter:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">description: Review staged changes before committing</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">allowed-tools: Read, Bash(git *)</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">argument-hint: [</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;">scope</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Review the staged changes in </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">`git diff --cached`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Check for:</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Logic errors and missing edge cases</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Debug code, TODOs, or console.log left in</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Anything that touches auth, payments, or data mutation</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Scope: $ARGUMENTS</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Output a bullet list of findings grouped by severity: blocker, warning, suggestion.</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">If there are no blockers, end with &quot;Ready to commit.&quot;</span></span></code></pre></figure>
+<p>Invoke it as <code>/review</code> or <code>/review payments module</code>.</p>
+<p>The <code>allowed-tools</code> frontmatter restricts which tools this command can use. The <code>argument-hint</code> is shown in autocomplete. Both are optional.</p>
+<p>Common patterns that earn their place as commands:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody><tr><td><code>/commit</code></td><td>Checks staged diff for TODOs and debug code, then writes the commit message</td></tr><tr><td><code>/review</code></td><td>Reviews a diff for logic errors, security gaps, and coverage before a PR</td></tr><tr><td><code>/gate</code></td><td>Runs the full quality pipeline (lint, typecheck, tests) and stops on first failure</td></tr><tr><td><code>/fix</code></td><td>Takes an issue number or error message as <code>$ARGUMENTS</code> and implements the fix</td></tr><tr><td><code>/explain</code></td><td>Deep-explains a file or function: what it does, callers, edge cases</td></tr></tbody></table></div>
+<p>The rule: if you are re-typing the same prompt structure more than three times, it belongs in a command.</p>
+<blockquote>
+<p>Project commands live in <code>.claude/commands/</code>. Personal commands that span all your projects live in <code>~/.claude/commands/</code> — covered in the global scope section below.</p>
+</blockquote>
+<h3 id="mcpjson--project-mcp-servers"><code>.mcp.json</code> , project MCP servers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mcpjson--project-mcp-servers" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>MCP servers give Claude tools beyond the built-in set: GitHub API, your database, Playwright for browser automation. <code>.mcp.json</code> at the project root defines which servers are available in this project. It is committed to git so the team shares the same server configuration.</p>
+<p>This is covered in full in L6. For now: the file exists at the project root, not inside <code>.claude/</code>.</p>
+<hr/>
+<h2 id="global-scope--the-same-ideas-wider-reach">Global scope , the same ideas, wider reach<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#global-scope--the-same-ideas-wider-reach" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Everything in project scope has a direct global equivalent. The mental model: <strong>project scope is for this codebase; global scope is for you across every codebase.</strong></p>
+<h3 id="what-the-two-scopes-share">What the two scopes share<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-two-scopes-share" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Primitive</th><th>Project scope</th><th>Global scope</th></tr></thead><tbody><tr><td>Memory</td><td><code>CLAUDE.md</code> (root or <code>.claude/</code>)</td><td><code>~/.claude/CLAUDE.md</code></td></tr><tr><td>Private memory</td><td><code>CLAUDE.local.md</code> (gitignored)</td><td>edit <code>~/.claude/CLAUDE.md</code> directly — it is never committed</td></tr><tr><td>Scoped memory</td><td><code>.claude/rules/*.md</code></td><td>no equivalent — rules are path-matched per project</td></tr><tr><td>Permissions</td><td><code>.claude/settings.json</code></td><td><code>~/.claude/settings.json</code></td></tr><tr><td>Personal overrides</td><td><code>.claude/settings.local.json</code></td><td>no equivalent — <code>~/.claude/settings.json</code> is already personal</td></tr><tr><td>Slash commands</td><td><code>.claude/commands/</code></td><td><code>~/.claude/commands/</code></td></tr><tr><td>MCP servers</td><td><code>.mcp.json</code> at project root</td><td><code>~/.claude.json</code> (user-scope server config)</td></tr></tbody></table></div>
+<h3 id="what-the-project-scope-has-that-global-does-not">What the project scope has that global does not<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-project-scope-has-that-global-does-not" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>.claude/rules/</code> has no global equivalent. Rules are path-matched, which only makes sense relative to a specific project’s directory structure. A global <code>rules/</code> fragment would have no meaningful paths to match against across all projects.</p>
+<p><code>CLAUDE.local.md</code> has no global equivalent either. At the global level, <code>~/.claude/CLAUDE.md</code> is already personal — it is never committed anywhere — so a separate “local” variant would be redundant.</p>
+<p>Hooks, skills, and agents can live in <code>.claude/</code> (project) or <code>~/.claude/</code> (global), but project scope is almost always the right choice — they encode project-specific behavior.</p>
+<h3 id="what-the-global-scope-has-that-project-does-not">What the global scope has that project does not<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-global-scope-has-that-project-does-not" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>~/.claude/projects/</code> is auto-memory: Claude writes and reads per-project memory across sessions, managed automatically. You do not edit this directory.</p>
+<p><code>~/.claude/sessions/</code> stores session history. Used by <code>claude -r</code> to browse and restore past sessions.</p>
+<p><code>~/.claude/plugins/</code> stores installed plugins. Plugins are global: installing a plugin makes it available in every project. Covered in L6.</p>
+<p><code>~/.claude/output-styles/</code> stores named response format definitions. Each file is a markdown document that becomes a named style you activate via <code>/config</code>. The style is injected as a system-prompt section that shapes how Claude formats every response in that session.</p>
+<p>Two examples that cover opposite ends of the spectrum:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># ~/.claude/output-styles/engineering.md</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">name: engineering</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">description: Dense, technical, no filler. For coding sessions.</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> No preamble. Start with the answer or the code.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Code before explanation.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Use tables for comparisons, not prose.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> If showing multiple options, rank them — don't just list.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Never use filler phrases: &quot;Great question&quot;, &quot;Certainly&quot;, &quot;Of course&quot;.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Omit explanation of things not asked about.</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># ~/.claude/output-styles/review.md</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">name: review</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">description: Structured findings for code and document review tasks.</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;">---</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Always open with a one-line verdict: ready / needs work / blocked.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Group findings by severity: blocker → warning → suggestion.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Each finding: file, line, problem, suggested fix.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> End with a summary of the main theme across all findings.</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> No praise for things that are simply correct.</span></span></code></pre></figure>
+<p>Activate with <code>/config</code> → Output Style → the style name. You can define as many as you want and switch between them mid-session.</p>
+<h3 id="claude-anatomy"><code>~/.claude/</code> anatomy<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#claude-anatomy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>~/.claude/
+├── settings.json       # global model, effort, universal allow/ask/deny, defaultMode
+├── CLAUDE.md           # conventions true for ALL your projects , keep under 50 lines
+├── commands/           # personal slash commands available in every project
+├── projects/           # auto-memory per project (managed by Claude, do not edit)
+├── sessions/           # session history (claude -r)
+├── plugins/            # installed plugins
+├── output-styles/      # named response format definitions
+└── .claude.json        # OAuth tokens, MCP user-scope config, per-project state (auto-managed)
+</code></pre>
+<p><strong><code>~/.claude/CLAUDE.md</code></strong> — the same format as project CLAUDE.md, loaded in every session regardless of project. Keep it to conventions that are genuinely universal across all your work: shell preferences, git commit style, general code rules. Anything project-specific that ends up here wastes context tokens in sessions where it is irrelevant.</p>
+<p><strong><code>~/.claude/commands/</code></strong> — same format as <code>.claude/commands/</code>. A command here is available in every project without copying it. Use for workflows that span projects: a <code>/audit</code> command that checks for hardcoded secrets, a <code>/standup</code> command that summarises recent git commits, a <code>/cleanup</code> command that removes debug artifacts.</p>
+<p><strong><code>~/.claude/settings.json</code></strong> — same schema as project <code>settings.json</code>. Sets the baseline for every session. Project settings layer on top; project settings win on scalar conflicts.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;model&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude-sonnet-4-6&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;effortLevel&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;showTurnDuration&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;cleanupPeriodDays&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">30</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;permissions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;defaultMode&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;acceptEdits&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;allow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(git *)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(npm run *)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(make *)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Read(~/.zshrc)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;ask&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(git push *)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;deny&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(rm -rf /*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(sudo rm *)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(curl *)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">      &quot;Bash(wget *)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></figure>
+<p><code>curl</code> and <code>wget</code> are denied globally because Bash URL patterns are trivially bypassed — they belong here rather than repeated in every project config. Use <code>WebFetch(domain:...)</code> rules in project <code>settings.json</code> for the specific domains each project needs to reach.</p>
+<h3 id="shell-aliases">Shell aliases<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#shell-aliases" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Add short aliases to <code>~/.zshrc</code>. The pattern is <code>cc</code> for interactive, <code>cch</code> for headless, <code>ccr</code> for resume, with model variants as needed. Each alias needs a distinct name — a duplicate silently overwrites the earlier one.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">alias</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> cc</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude --dangerously-skip-permissions&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">alias</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> cco</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude --dangerously-skip-permissions --model claude-opus-4-7&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">alias</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ccr</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude -c --dangerously-skip-permissions&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">alias</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> cch</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude -p --dangerously-skip-permissions&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">alias</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ccmax</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude --dangerously-skip-permissions --model claude-opus-4-7 --effort max&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">alias</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> cci</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;claude -p --dangerously-skip-permissions --model claude-sonnet-4-6 --effort low --bare&quot;</span></span></code></pre></figure>
+<p>Run <code>source ~/.zshrc</code> to apply.</p>
+<hr/>
+<h2 id="permission-hierarchy--how-the-scopes-compose">Permission hierarchy , how the scopes compose<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#permission-hierarchy--how-the-scopes-compose" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Rules from all scopes are active simultaneously. The merge works differently depending on whether the setting is an array or a scalar.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart BT\n    A[\&quot;plugin.json defaults&lt;br/>(lowest priority — effective floor)\&quot;]\n    B[\&quot;~/.claude/settings.json&lt;br/>(global — your personal baseline)\&quot;]\n    C[\&quot;.claude/settings.json&lt;br/>(project — committed, shared with team)\&quot;]\n    D[\&quot;.claude/settings.local.json&lt;br/>(personal overrides — gitignored)\&quot;]\n    E[\&quot;command-line flags&lt;br/>(session only — not persisted)\&quot;]\n    F[\&quot;managed settings&lt;br/>(org-enforced — hard ceiling, cannot be overridden)\&quot;]\n\n    A -->|\&quot;overrides\&quot;| B\n    B -->|\&quot;overrides\&quot;| C\n    C -->|\&quot;overrides\&quot;| D\n    D -->|\&quot;overrides\&quot;| E\n    E -->|\&quot;overrides\&quot;| F&quot;">flowchart BT
+    A[&quot;plugin.json defaults&lt;br/>(lowest priority — effective floor)&quot;]
+    B[&quot;~/.claude/settings.json&lt;br/>(global — your personal baseline)&quot;]
+    C[&quot;.claude/settings.json&lt;br/>(project — committed, shared with team)&quot;]
+    D[&quot;.claude/settings.local.json&lt;br/>(personal overrides — gitignored)&quot;]
+    E[&quot;command-line flags&lt;br/>(session only — not persisted)&quot;]
+    F[&quot;managed settings&lt;br/>(org-enforced — hard ceiling, cannot be overridden)&quot;]
+
+    A -->|&quot;overrides&quot;| B
+    B -->|&quot;overrides&quot;| C
+    C -->|&quot;overrides&quot;| D
+    D -->|&quot;overrides&quot;| E
+    E -->|&quot;overrides&quot;| F
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p><strong>Arrays</strong> (<code>allow</code>, <code>ask</code>, <code>deny</code>) are concatenated and deduplicated across all scopes. A rule in the global deny list is denied in every project. A rule in the project allow list adds to, not replaces, the global allow list. Both sets are active.</p>
+<p><strong>Scalars</strong> (<code>model</code>, <code>defaultMode</code>, <code>effortLevel</code>) resolve to the value set by the highest-priority scope that defines them. If global sets <code>defaultMode: acceptEdits</code> and the project also sets it, the project value wins. If the project does not set it, the global value applies.</p>
+<p><strong>Managed settings</strong> are the hard ceiling. They cannot be overridden by any user, project, or local configuration. Enterprise environments may deliver them via <code>managed-settings.json</code> or a <code>managed-settings.d/</code> drop-in directory.</p>
+<p>The practical consequence: put your universal deny rules globally once. Put project-specific allows and asks in the project. The result in any given session is the union of both.</p>
+<hr/>
+<h2 id="map-of-l5l9">Map of L5–L9<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#map-of-l5l9" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>L4 introduced the scoping architecture. The next five levels are deep dives into each primitive:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Level</th><th>Primitive</th><th>What it does</th></tr></thead><tbody><tr><td><a href="./L5-Hooks" class="internal" data-slug="L5-Hooks">L5-Hooks</a></td><td>Hooks</td><td>Deterministic lifecycle enforcement — shell scripts that fire on events (<code>PreToolUse</code>, <code>PostToolUse</code>, <code>SessionStart</code>)</td></tr><tr><td><a href="./L6-MCP-Servers-and-Plugins" class="internal" data-slug="L6-MCP-Servers-and-Plugins">L6-MCP-Servers-and-Plugins</a></td><td>MCP + Plugins + LSP</td><td>Connects Claude to external services; extends it with plugin-installed capabilities and semantic code navigation</td></tr><tr><td><a href="./L7-Skills-Agents-Commands" class="internal" data-slug="L7-Skills-Agents-Commands">L7-Skills-Agents-Commands</a></td><td>Skills, Agents, Commands</td><td>Packages reusable workflows; delegates subtasks to isolated sub-agents</td></tr><tr><td><a href="./L8-MultiAgent-Headless-Power" class="internal" data-slug="L8-MultiAgent-Headless-Power">L8-MultiAgent-Headless-Power</a></td><td>Multi-Agent &amp; Headless</td><td>Parallel execution via git worktrees, CI integration, scheduling, power prompting patterns</td></tr><tr><td><a href="./L9-Context-Cost" class="internal" data-slug="L9-Context-Cost">L9-Context-Cost</a></td><td>Context Cost</td><td>Token budget implications of every harness component you’ve configured</td></tr></tbody></table></div>
+<p>Each primitive can be configured at project scope, global scope, or both. L9 covers the cost tradeoffs of where you place each one.</p>
+<hr/>
+<h2 id="tips">Tips<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tips" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> Set <code>defaultMode: acceptEdits</code> in <code>~/.claude/settings.json</code> once , every project inherits it without repeating it</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Keep <code>~/.claude/CLAUDE.md</code> under 50 lines , it loads in every session including projects where it is irrelevant</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Put universal blockers (<code>curl</code>, <code>wget</code>, <code>sudo rm</code>) in the global deny list; put project-specific restrictions in the project deny list</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>/init</code> in every new project, then trim the output immediately; add <code>CLAUDE.local.md</code> to <code>.gitignore</code> for personal notes</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Commit <code>CLAUDE.md</code>, <code>.claude/settings.json</code>, and <code>.mcp.json</code> , teammates get the same environment automatically</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>settings.local.json</code> and <code>CLAUDE.local.md</code> → always in <code>.gitignore</code></li>
+<li class="task-list-item"><input type="checkbox" disabled/> Rules fragments in <code>.claude/rules/</code> load lazily — they cost nothing in sessions where Claude doesn’t touch their paths</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Each alias in <code>~/.zshrc</code> needs a distinct name , a duplicate silently overwrites the earlier definition</li>
+</ul>
+<hr/>
+<h2 id="whats-next">What’s next<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#whats-next" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>L4 maps the whole system. L5 goes deep on <strong>hooks</strong> , the deterministic enforcement layer that makes CLAUDE.md rules mechanical rather than advisory.</p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-5" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#l4--scoping-project-vs-global" data-for="l4--scoping-project-vs-global">L4 , Scoping: Project vs Global</a></li><li class="depth-1"><a href="#the-architecture--five-layers" data-for="the-architecture--five-layers">The architecture , five layers</a></li><li class="depth-1"><a href="#project-scope--the-full-picture" data-for="project-scope--the-full-picture">Project scope , the full picture</a></li><li class="depth-2"><a href="#clauderules--scoped-claudemd-fragments" data-for="clauderules--scoped-claudemd-fragments">.claude/rules/ , scoped CLAUDE.md fragments</a></li><li class="depth-2"><a href="#another-solution-to-claudemd-explosion--claudemd-per-module" data-for="another-solution-to-claudemd-explosion--claudemd-per-module">Another solution to CLAUDE.md explosion , CLAUDE.md per module</a></li><li class="depth-2"><a href="#claudecommands--project-slash-commands" data-for="claudecommands--project-slash-commands">.claude/commands/ , project slash commands</a></li><li class="depth-2"><a href="#mcpjson--project-mcp-servers" data-for="mcpjson--project-mcp-servers">.mcp.json , project MCP servers</a></li><li class="depth-1"><a href="#global-scope--the-same-ideas-wider-reach" data-for="global-scope--the-same-ideas-wider-reach">Global scope , the same ideas, wider reach</a></li><li class="depth-2"><a href="#what-the-two-scopes-share" data-for="what-the-two-scopes-share">What the two scopes share</a></li><li class="depth-2"><a href="#what-the-project-scope-has-that-global-does-not" data-for="what-the-project-scope-has-that-global-does-not">What the project scope has that global does not</a></li><li class="depth-2"><a href="#what-the-global-scope-has-that-project-does-not" data-for="what-the-global-scope-has-that-project-does-not">What the global scope has that project does not</a></li><li class="depth-2"><a href="#claude-anatomy" data-for="claude-anatomy">~/.claude/ anatomy</a></li><li class="depth-2"><a href="#shell-aliases" data-for="shell-aliases">Shell aliases</a></li><li class="depth-1"><a href="#permission-hierarchy--how-the-scopes-compose" data-for="permission-hierarchy--how-the-scopes-compose">Permission hierarchy , how the scopes compose</a></li><li class="depth-1"><a href="#map-of-l5l9" data-for="map-of-l5l9">Map of L5–L9</a></li><li class="depth-1"><a href="#tips" data-for="tips">Tips</a></li><li class="depth-1"><a href="#whats-next" data-for="whats-next">What’s next</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-2" class="overflow"><li><a href="./L2-Context-CLAUDE-md" class="internal">L2-Context-CLAUDE-md</a></li><li><a href="./L3-Permissions-Settings" class="internal">L3-Permissions-Settings</a></li><li><a href="./Summary" class="internal">Summary</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/Mahmoud-ABK">GitHub</a></li><li><a href="benabdelkadermahmoud2003@gmail.com">Email</a></li><li><a href="www.linkedin.com/in/mahmoud-ben-abdelkader">Linkedin</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>
