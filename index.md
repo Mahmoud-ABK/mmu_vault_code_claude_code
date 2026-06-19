@@ -1,11 +1,11 @@
 ---
 vault_name: claude-code
 domain: developer tooling / AI-assisted engineering
-version: v.-1
-status: 1-incubation
-parent_vault: vaultFactory
-github_repo: null
-hosted_url: null
+version: v.1
+status: 4-published
+parent_vault: null
+github_repo: mmu_vault_code_claude_code
+hosted_url: https://mahmoud-abk.github.io/mmu_vault_code_claude_code/
 created: 2026-05-25
 ---
 
@@ -38,11 +38,11 @@ claude code/
 
 ## Notes
 
-9 levels. L4 is the architectural pivot — introduces global scope and maps L5–L9. Pro . Candidate for promotion to `v.-1*`. No GitHub repo yet.
+9 levels. L4 is the architectural pivot — introduces global scope and maps L5–L9. Released as `v.1`: both branches (`main` content + `publish` Quartz build) pushed and live via GitHub Pages on the `publish` branch.
 
 renaming suggestion : code the Claude Code
 ## Links
 
-- **GitHub:** —
-- **Published:** —
-- **Publish path:** —
+- **GitHub:** https://github.com/Mahmoud-ABK/mmu_vault_code_claude_code
+- **Published:** https://mahmoud-abk.github.io/mmu_vault_code_claude_code/
+- **Publish path:** `published/code_claude_code/`
